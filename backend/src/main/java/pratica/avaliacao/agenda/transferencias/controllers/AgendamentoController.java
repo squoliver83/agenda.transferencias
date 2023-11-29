@@ -37,6 +37,4 @@ public class AgendamentoController {
                 .buildAndExpand(dto.getId()).toUri();
         return ResponseEntity.created(uri).body(dto);
     }
-
-
 }

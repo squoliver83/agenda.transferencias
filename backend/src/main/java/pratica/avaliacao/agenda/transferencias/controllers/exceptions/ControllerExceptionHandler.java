@@ -8,7 +8,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import pratica.avaliacao.agenda.transferencias.services.exceptions.InvalidDateException;
-import pratica.avaliacao.agenda.transferencias.services.exceptions.ResourceNotFoundException;
 
 import java.time.Instant;
 
@@ -27,12 +26,12 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<StandardError> invalidTransferDate(MethodArgumentNotValidException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> invalidArgument(MethodArgumentNotValidException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError();
         err.setTimestamp(Instant.now());
         err.setStatus(status.value());
-        err.setError("Invalid transfer date");
+        err.setError("Invalid argument");
         err.setMessage(e.getMessage());
         err.setPath(request.getRequestURI());
         return ResponseEntity.status(status).body(err);
