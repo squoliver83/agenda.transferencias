@@ -17,7 +17,8 @@ public class Conta {
     private Long id;
     private Double saldo;
 
-    public Conta() {}
+    public Conta() {
+    }
 
     public Conta(Long id, Double saldo) {
         this.id = id;
@@ -36,8 +37,16 @@ public class Conta {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
-        this.saldo = saldo;
+    public void depositar(Double valor) {
+        if (valor > 0) {
+            this.saldo += valor;
+        }
+    }
+
+    public void sacar(Double valor) {
+        if(saldo >= valor) {
+            saldo -= valor;
+        }
     }
 
     @Override
