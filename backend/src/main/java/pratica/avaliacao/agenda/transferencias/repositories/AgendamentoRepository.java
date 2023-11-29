@@ -6,4 +6,5 @@ import pratica.avaliacao.agenda.transferencias.entities.Agendamento;
 
 @Repository
 public interface AgendamentoRepository extends JpaRepository<Agendamento, Long> {
+
 }

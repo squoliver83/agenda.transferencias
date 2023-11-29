@@ -1,34 +1,29 @@
-package pratica.avaliacao.agenda.transferencias.entities;
+package pratica.avaliacao.agenda.transferencias.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import pratica.avaliacao.agenda.transferencias.entities.Agendamento;
 
 import java.time.Instant;
 
-@Entity
-@Table(name = "tb_agendamento")
-public class Agendamento {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AgendamentoDTO {
     private Long id;
+    @NotBlank(message = "É preciso informar uma conta de origem")
     private String contaOrigem;
+    @NotBlank(message = "É preciso informar uma conta de destino")
     private String contaDestino;
+    @Positive(message = "Valor deve ser positivo")
     private Double valor;
     private Double taxa;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    @FutureOrPresent(message = "Data final precisa ser no presente ou futura")
     private Instant dataTransferencia;
-    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant data;
 
-    public Agendamento() {
+    public AgendamentoDTO() {
     }
 
-    public Agendamento(Long id, String contaOrigem, String contaDestino, Double valor, Double taxa, Instant dataTransferencia) {
+    public AgendamentoDTO(Long id, String contaOrigem, String contaDestino, Double valor, Double taxa, Instant dataTransferencia) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
@@ -36,6 +31,16 @@ public class Agendamento {
         this.taxa = taxa;
         this.dataTransferencia = dataTransferencia;
         this.data = Instant.now();
+    }
+
+    public AgendamentoDTO(Agendamento entity) {
+        id = entity.getId();
+        contaOrigem = entity.getContaOrigem();
+        contaDestino = entity.getContaDestino();
+        valor = entity.getValor();
+        taxa = entity.getTaxa();
+        dataTransferencia = entity.getDataTransferencia();
+        data = entity.getData();
     }
 
     public Long getId() {
