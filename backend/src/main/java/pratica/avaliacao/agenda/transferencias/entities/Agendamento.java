@@ -1,9 +1,11 @@
 package pratica.avaliacao.agenda.transferencias.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import java.time.Instant;
@@ -18,7 +20,9 @@ public class Agendamento {
     private Double valor;
     private Instant dataInicial;
     private Instant dataFinal;
+    @OneToOne(cascade = CascadeType.ALL)
     private Conta contaOrigem;
+    @OneToOne(cascade = CascadeType.ALL)
     private Conta contaDestino;
 
     public Agendamento() {
