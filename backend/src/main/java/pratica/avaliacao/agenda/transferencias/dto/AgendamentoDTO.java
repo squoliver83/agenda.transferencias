@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import pratica.avaliacao.agenda.transferencias.entities.Agendamento;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 public class AgendamentoDTO {
@@ -14,8 +15,8 @@ public class AgendamentoDTO {
     @NotBlank(message = "É preciso informar uma conta de destino")
     private String contaDestino;
     @Positive(message = "Valor deve ser positivo")
-    private Double valor;
-    private Double taxa;
+    private BigDecimal valor;
+    private BigDecimal taxa;
     @FutureOrPresent(message = "Data final precisa ser no presente ou futura")
     private Instant dataTransferencia;
     private Instant data;
@@ -23,7 +24,7 @@ public class AgendamentoDTO {
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long id, String contaOrigem, String contaDestino, Double valor, Double taxa, Instant dataTransferencia) {
+    public AgendamentoDTO(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa, Instant dataTransferencia) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
@@ -67,19 +68,19 @@ public class AgendamentoDTO {
         this.contaDestino = contaDestino;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public Double getTaxa() {
+    public BigDecimal getTaxa() {
         return taxa;
     }
 
-    public void setTaxa(Double taxa) {
+    public void setTaxa(BigDecimal taxa) {
         this.taxa = taxa;
     }
 

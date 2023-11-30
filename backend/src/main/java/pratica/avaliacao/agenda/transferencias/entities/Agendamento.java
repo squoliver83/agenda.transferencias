@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -18,8 +19,8 @@ public class Agendamento {
     private Long id;
     private String contaOrigem;
     private String contaDestino;
-    private Double valor;
-    private Double taxa;
+    private BigDecimal valor;
+    private BigDecimal taxa;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant dataTransferencia;
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
@@ -28,7 +29,7 @@ public class Agendamento {
     public Agendamento() {
     }
 
-    public Agendamento(Long id, String contaOrigem, String contaDestino, Double valor, Double taxa, Instant dataTransferencia) {
+    public Agendamento(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa, Instant dataTransferencia) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
@@ -62,19 +63,19 @@ public class Agendamento {
         this.contaDestino = contaDestino;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public Double getTaxa() {
+    public BigDecimal getTaxa() {
         return taxa;
     }
 
-    public void setTaxa(Double taxa) {
+    public void setTaxa(BigDecimal taxa) {
         this.taxa = taxa;
     }
 
