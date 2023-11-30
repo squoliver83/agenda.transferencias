@@ -16,7 +16,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/agendamentos")
+@RequestMapping(value = "/api/agendamentos")
 public class AgendamentoController {
 
     @Autowired
