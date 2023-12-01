@@ -7,6 +7,7 @@ import pratica.avaliacao.agenda.transferencias.entities.Agendamento;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 
 public class AgendamentoDTO {
     private Long id;
@@ -18,20 +19,20 @@ public class AgendamentoDTO {
     private BigDecimal valor;
     private BigDecimal taxa;
     @FutureOrPresent(message = "Data final precisa ser no presente ou futura")
-    private Instant dataTransferencia;
-    private Instant data;
+    private LocalDate dataTransferencia;
+    private LocalDate data;
 
     public AgendamentoDTO() {
     }
 
-    public AgendamentoDTO(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa, Instant dataTransferencia) {
+    public AgendamentoDTO(Long id, String contaOrigem, String contaDestino, BigDecimal valor, BigDecimal taxa, LocalDate dataTransferencia) {
         this.id = id;
         this.contaOrigem = contaOrigem;
         this.contaDestino = contaDestino;
         this.valor = valor;
         this.taxa = taxa;
         this.dataTransferencia = dataTransferencia;
-        this.data = Instant.now();
+        this.data = LocalDate.now();
     }
 
     public AgendamentoDTO(Agendamento entity) {
@@ -84,19 +85,19 @@ public class AgendamentoDTO {
         this.taxa = taxa;
     }
 
-    public Instant getDataTransferencia() {
+    public LocalDate getDataTransferencia() {
         return dataTransferencia;
     }
 
-    public void setDataTransferencia(Instant dataTransferencia) {
+    public void setDataTransferencia(LocalDate dataTransferencia) {
         this.dataTransferencia = dataTransferencia;
     }
 
-    public Instant getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Instant data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 }

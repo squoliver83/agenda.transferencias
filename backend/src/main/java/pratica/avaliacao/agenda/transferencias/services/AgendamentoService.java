@@ -11,6 +11,7 @@ import pratica.avaliacao.agenda.transferencias.services.exceptions.InvalidDateEx
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -28,8 +29,7 @@ public class AgendamentoService {
 
     @Transactional
     public AgendamentoDTO insert(AgendamentoDTO dto) {
-        System.out.println(dto.getDataTransferencia());
-        Instant agora = Instant.now();
+        LocalDate agora = LocalDate.now();
         if (validaData(agora, dto.getDataTransferencia())) {
             throw new InvalidDateException("Período maior que 50 dias");
         }
@@ -47,7 +47,7 @@ public class AgendamentoService {
         return new AgendamentoDTO(entity);
     }
 
-    private BigDecimal calculaTaxa(BigDecimal valor, Instant dataInicial, Instant dataTransferencia) {
+    private BigDecimal calculaTaxa(BigDecimal valor, LocalDate dataInicial, LocalDate dataTransferencia) {
         int dias = (int) ChronoUnit.DAYS.between(dataInicial, dataTransferencia);
         System.out.println(dias);
         BigDecimal taxa = BigDecimal.ZERO;
@@ -73,7 +73,7 @@ public class AgendamentoService {
         }
     }
 
-    private boolean validaData(Instant dataAtual, Instant dataTransferencia) {
+    private boolean validaData(LocalDate dataAtual, LocalDate dataTransferencia) {
         return ChronoUnit.DAYS.between(dataAtual, dataTransferencia) > 50;
     }
 }
