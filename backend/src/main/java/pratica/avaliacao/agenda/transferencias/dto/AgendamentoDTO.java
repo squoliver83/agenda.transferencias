@@ -2,20 +2,24 @@ package pratica.avaliacao.agenda.transferencias.dto;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import pratica.avaliacao.agenda.transferencias.entities.Agendamento;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.time.LocalDate;
 
 public class AgendamentoDTO {
     private Long id;
     @NotBlank(message = "É preciso informar uma conta de origem")
+    @Size(min = 10, max = 10, message = "Conta precisa de 10 caracteres")
     private String contaOrigem;
     @NotBlank(message = "É preciso informar uma conta de destino")
+    @Size(min = 10, max = 10, message = "Conta precisa de 10 caracteres")
     private String contaDestino;
     @Positive(message = "Valor deve ser positivo")
+    @NotNull(message = "Valor não deve ser nulo")
     private BigDecimal valor;
     private BigDecimal taxa;
     @FutureOrPresent(message = "Data final precisa ser no presente ou futura")

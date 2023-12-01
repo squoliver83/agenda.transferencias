@@ -28,7 +28,7 @@ public class AgendamentoController {
         return ResponseEntity.ok().body(list);
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<AgendamentoDTO> insert(@Valid @RequestBody AgendamentoDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder

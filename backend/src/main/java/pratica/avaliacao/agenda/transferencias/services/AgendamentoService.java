@@ -10,7 +10,6 @@ import pratica.avaliacao.agenda.transferencias.services.exceptions.InvalidDateEx
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -24,7 +23,7 @@ public class AgendamentoService {
     @Transactional(readOnly = true)
     public List<AgendamentoDTO> findAll() {
         List<Agendamento> list = repository.findAll();
-        return list.stream().map(agendamento -> new AgendamentoDTO(agendamento)).toList();
+        return list.stream().map(AgendamentoDTO::new).toList();
     }
 
     @Transactional
@@ -69,11 +68,18 @@ public class AgendamentoService {
         if (!taxa.equals(BigDecimal.ZERO)) {
             return taxa;
         } else {
-            throw new ArithmeticException("Tax can't be zero");
+            throw new ArithmeticException("Taxa não pode ser nula");
         }
     }
 
     private boolean validaData(LocalDate dataAtual, LocalDate dataTransferencia) {
-        return ChronoUnit.DAYS.between(dataAtual, dataTransferencia) > 50;
+        try {
+            if (dataTransferencia.isBefore(LocalDate.now())) {
+                throw new InvalidDateException("Data de transferência não pode ser anterior ao dia de hoje");
+            }
+            return ChronoUnit.DAYS.between(dataAtual, dataTransferencia) > 50;
+        } catch (RuntimeException e) {
+            throw new InvalidDateException("Data de transferência inválida ou nula");
+        }
     }
 }
